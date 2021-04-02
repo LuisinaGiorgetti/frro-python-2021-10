@@ -9,15 +9,15 @@ def numeros_al_final_basico(lista: List[Union[float, str]]) -> List[Union[float,
     elementos numéricos al final.
     """
     num = []
-    strings = []
+    letras = []
 
     for elemento in lista:
-        if isinstance(elemento, int) or isinstance(elemento, float):
+        if type(elemento) == int or type(elemento) == float:
             num.append(elemento)
         else:
-            strings.append(elemento)
-    strings.extend(num)
-    return strings
+            letras.append(elemento)
+    letras.extend(num)
+    return letras
 
 
 # NO MODIFICAR - INICIO
@@ -29,10 +29,11 @@ assert numeros_al_final_basico([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 
 
 def numeros_al_final_comprension(lista: List[Union[float, str]]) -> List[Union[float, str]]:
     """Re-escribir utilizando comprensión de listas."""
-    num = [elemento for elemento in lista if isinstance(elemento, int) or isinstance(elemento, float)]
-    strings = [elemento for elemento in lista if isinstance(elemento, str)]
-    strings.extend(num)
-    return strings
+
+    num = [elemento for elemento in lista if type(elemento) == int or type(elemento) == float]
+    letras = [elemento for elemento in lista if type(elemento) == str]
+    letras.extend(num)
+    return letras
 
 # NO MODIFICAR - INICIO
 assert numeros_al_final_comprension([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 1, 10]
@@ -46,7 +47,7 @@ def numeros_al_final_sorted(lista: List[Union[float, str]]) -> List[Union[float,
     """Re-escribir utilizando la función sorted con una custom key.
     Referencia: https://docs.python.org/3/library/functions.html#sorted
     """
-    return sorted(lista, key=lambda x: isinstance(x, int) or isinstance(x, float))
+    return sorted(lista, key=lambda x: type(x) == int or type(x) == float)
 
 # NO MODIFICAR - INICIO
 assert numeros_al_final_sorted([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 1, 10]
