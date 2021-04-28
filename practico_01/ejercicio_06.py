@@ -12,10 +12,10 @@ def numeros_al_final_basico(lista: List[Union[float, str]]) -> List[Union[float,
     letras = []
 
     for elemento in lista:
-        if type(elemento) == int or type(elemento) == float:
-            num.append(elemento)
-        else:
+        if type(elemento) == str:
             letras.append(elemento)
+        else:
+            num.append(elemento)
     letras.extend(num)
     return letras
 
@@ -30,7 +30,7 @@ assert numeros_al_final_basico([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 
 def numeros_al_final_comprension(lista: List[Union[float, str]]) -> List[Union[float, str]]:
     """Re-escribir utilizando comprensión de listas."""
 
-    num = [elemento for elemento in lista if type(elemento) == int or type(elemento) == float]
+    num = [elemento for elemento in lista if type(elemento) != str]
     letras = [elemento for elemento in lista if type(elemento) == str]
     letras.extend(num)
     return letras
@@ -47,7 +47,7 @@ def numeros_al_final_sorted(lista: List[Union[float, str]]) -> List[Union[float,
     """Re-escribir utilizando la función sorted con una custom key.
     Referencia: https://docs.python.org/3/library/functions.html#sorted
     """
-    return sorted(lista, key=lambda x: type(x) == int or type(x) == float)
+    return sorted(lista, key=lambda x: type(x) != str)
 
 # NO MODIFICAR - INICIO
 assert numeros_al_final_sorted([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 1, 10]
@@ -61,7 +61,7 @@ def numeros_al_final_filter(lista: List[Union[float, str]]) -> List[Union[float,
     """CHALLENGE OPCIONAL - Re-escribir utilizando la función filter.
     Referencia: https://docs.python.org/3/library/functions.html#filter
     """
-    return list(filter(lambda x: isinstance(x, str), lista)) + list(filter(lambda x: isinstance(x, int), lista))
+    return list(filter(lambda x: type(x) == str, lista)) + list(filter(lambda x: type(x) != str, lista))
 
 
 # NO MODIFICAR - INICIO
