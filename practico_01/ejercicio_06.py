@@ -76,18 +76,25 @@ if __name__ == "__main__":
 def numeros_al_final_recursivo(lista: List[Union[float, str]]) -> List[Union[float, str]]:
     """CHALLENGE OPCIONAL - Re-escribir de forma recursiva."""
 
-    def devuelve_letras(lista2: List[Union[float, str]]) -> List[Union[float, str]]:
-        # CASO BASE
-        if len(lista2) == 1:
-            return lista2
-        # CASO RECURSIVO
-        if str(lista2[0]).isalpha():
-            return list(lista2[0]) + list(devuelve_letras(lista2[1:]))
-        else:
-            return devuelve_letras(lista2[1:])
+    # CASO BASE
+    if len(lista) == 1:
+        return lista
 
-    letras = devuelve_letras(lista)
-    return letras + list(filter(lambda x: type(x) != str, lista))
+    # CASO RECURSIVO
+
+    if type(lista[0]) == str:
+        return list(lista[0]) + numeros_al_final_recursivo(lista[1:])
+    elif type(lista[-1]) != str:
+        numeros = lista[-1:]
+        return list(numeros_al_final_recursivo(lista[:-1])) + numeros
+    else:
+        for x in list(reversed(lista)):
+            if type(x) != str:
+                i = lista.index(x)
+                lista.append(x)
+                lista.remove(x)
+                break
+        return numeros_al_final_recursivo(lista)
 
 
 # NO MODIFICAR - INICIO
